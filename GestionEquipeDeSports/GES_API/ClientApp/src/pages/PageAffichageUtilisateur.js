@@ -11,5 +11,4 @@ function PageAffichageUtilisateur() {
         </Container>
     );
 }
-
 export default PageAffichageUtilisateur;

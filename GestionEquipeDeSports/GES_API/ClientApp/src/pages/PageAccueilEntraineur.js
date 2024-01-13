@@ -17,7 +17,6 @@ export const PageAccueilEntraineur = () => {
     const [seconds, setSeconds] = useState(0);
     const { getAccessTokenSilently, user } = useAuth0();
     const navigate = useNavigate();
-
     const [estUtilisateurPret, setEstUtilisateurPret] = useState(false);
     const [estEquipesPret, setEstEquipesPret] = useState(false);
     const [estEvenementsPret, setEstEvenementsPret] = useState(false);
