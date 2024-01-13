@@ -1,0 +1,12 @@
+Revue:
+PowerPoint
+Lister user story;
+Nombre de point par user story;
+bilan se qui est vraiment livré;
+montrer le burn-down;
+annoncer la prochaine iteration;
+si pas fait on dit c'est dans le backlog;
+
+Retro:
+rencontre en equipe pour savoir se qui a bien ete et mal ete et des engagement;
+utiliser retromats(siteweb);

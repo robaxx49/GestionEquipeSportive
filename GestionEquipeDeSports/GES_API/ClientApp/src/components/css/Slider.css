@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box;
+}
+
+.Slider{
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.caroussel.overlay{
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10%;
+    padding: 0.4rem 1.5rem;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.6);
+    color: #FFFF;
+}
+
+.caroussel.overlay_title{
+  margin: 0.8rem 0 1rem 0;
+}
+
+.caroussel .thumbs {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 10px;
+}
+
+.caroussel .thumb {
+    margin: 0.5px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px){
+    .caroussel .slide img{
+        width: 100vh !important;
+        height: 40vh;
+        object-fit: cover;
+    }
+}

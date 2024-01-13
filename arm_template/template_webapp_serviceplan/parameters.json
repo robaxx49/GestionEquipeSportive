@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionId": {
+            "value": "bc058abe-2bd9-4fe6-997e-a7406e675b2f"
+        },
+        "name": {
+            "value": "GestionEquipeSportive"
+        },
+        "location": {
+            "value": "Canada Central"
+        },
+        "hostingPlanName": {
+            "value": "PlanGestionEquipeSportive"
+        },
+        "serverFarmResourceGroup": {
+            "value": "myapp-rg"
+        },
+        "alwaysOn": {
+            "value": false
+        },
+        "ftpsState": {
+            "value": "FtpsOnly"
+        },
+        "sku": {
+            "value": "Free"
+        },
+        "skuCode": {
+            "value": "F1"
+        },
+        "numberOfWorkers": {
+            "value": "1"
+        },
+        "workerSize": {
+            "value": "0"
+        },
+        "workerSizeId": {
+            "value": "0"
+        },
+        "currentStack": {
+            "value": "dotnet"
+        },
+        "phpVersion": {
+            "value": "OFF"
+        },
+        "netFrameworkVersion": {
+            "value": "v6.0"
+        }
+    }
+}

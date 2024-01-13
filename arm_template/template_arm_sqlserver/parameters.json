@@ -1,0 +1,214 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "collation": {
+            "value": "SQL_Latin1_General_CP1_CI_AS"
+        },
+        "databaseName": {
+            "value": "Equipe_Sportive"
+        },
+        "tier": {
+            "value": "GeneralPurpose"
+        },
+        "skuName": {
+            "value": "GP_S_Gen5_1"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "maxSizeBytes": {
+            "value": 5368709120
+        },
+        "sampleName": {
+            "value": ""
+        },
+        "serverName": {
+            "value": "synthese-sqlserver"
+        },
+        "licenseType": {
+            "value": ""
+        },
+        "readScaleOut": {
+            "value": "Disabled"
+        },
+        "zoneRedundant": {
+            "value": false
+        },
+        "minCapacity": {
+            "value": "0.5"
+        },
+        "autoPauseDelay": {
+            "value": 60
+        },
+        "numberOfReplicas": {
+            "value": 0
+        },
+        "enableADS": {
+            "value": false
+        },
+        "allowAzureIps": {
+            "value": true
+        },
+        "allowClientIp": {
+            "value": true
+        },
+        "clientIpValue": {
+            "value": "96.21.113.237"
+        },
+        "databaseTags": {
+            "value": {}
+        },
+        "serverTags": {
+            "value": {}
+        },
+        "enableVA": {
+            "value": false
+        },
+        "vaStoragelessEnabled": {
+            "value": false
+        },
+        "enableSqlLedger": {
+            "value": false
+        },
+        "enableDigestStorage": {
+            "value": "Disabled"
+        },
+        "digestStorageOption": {
+            "value": ""
+        },
+        "digestStorageName": {
+            "value": ""
+        },
+        "blobStorageContainerName": {
+            "value": ""
+        },
+        "retentionDays": {
+            "value": ""
+        },
+        "retentionPolicy": {
+            "value": false
+        },
+        "digestAccountResourceGroup": {
+            "value": ""
+        },
+        "isNewDigestLocation": {
+            "value": false
+        },
+        "digestRegion": {
+            "value": ""
+        },
+        "storageAccountdigestRegion": {
+            "value": ""
+        },
+        "isPermissionAssigned": {
+            "value": false
+        },
+        "sqlLedgerTemplateLink": {
+            "value": "https://sqlazureextension.hosting.portal.azure.net/sqlazureextension/Content/2.1.0225764/DeploymentTemplates/SqlLedger.json"
+        },
+        "useVAManagedIdentity": {
+            "value": false
+        },
+        "enablePrivateEndpoint": {
+            "value": false
+        },
+        "privateEndpointNestedTemplateId": {
+            "value": "pe-66f260fe-1404-4554-a756-02bcfb562017"
+        },
+        "privateEndpointSubscriptionId": {
+            "value": ""
+        },
+        "privateEndpointResourceGroup": {
+            "value": ""
+        },
+        "privateEndpointName": {
+            "value": ""
+        },
+        "privateEndpointLocation": {
+            "value": ""
+        },
+        "privateEndpointSubnetId": {
+            "value": ""
+        },
+        "privateLinkServiceName": {
+            "value": ""
+        },
+        "privateLinkServiceServiceId": {
+            "value": ""
+        },
+        "privateEndpointVnetSubscriptionId": {
+            "value": ""
+        },
+        "privateEndpointVnetResourceGroup": {
+            "value": ""
+        },
+        "privateEndpointVnetName": {
+            "value": ""
+        },
+        "privateEndpointSubnetName": {
+            "value": ""
+        },
+        "enablePrivateDnsZone": {
+            "value": true
+        },
+        "privateLinkPrivateDnsZoneFQDN": {
+            "value": "privatelink.database.windows.net"
+        },
+        "privateEndpointDnsRecordUniqueId": {
+            "value": "66f260fe-1404-4554-a756-02bcfb56201a"
+        },
+        "privateEndpointTemplateLink": {
+            "value": "https://sqlazureextension.hosting.portal.azure.net/sqlazureextension/Content/2.1.0225764/DeploymentTemplates/PrivateEndpoint.json"
+        },
+        "privateDnsForPrivateEndpointTemplateLink": {
+            "value": "https://sqlazureextension.hosting.portal.azure.net/sqlazureextension/Content/2.1.0225764/DeploymentTemplates/PrivateDnsForPrivateEndpoint.json"
+        },
+        "privateDnsForPrivateEndpointNicTemplateLink": {
+            "value": "https://sqlazureextension.hosting.portal.azure.net/sqlazureextension/Content/2.1.0225764/DeploymentTemplates/PrivateDnsForPrivateEndpointNic.json"
+        },
+        "privateDnsForPrivateEndpointIpConfigTemplateLink": {
+            "value": "https://sqlazureextension.hosting.portal.azure.net/sqlazureextension/Content/2.1.0225764/DeploymentTemplates/PrivateDnsForPrivateEndpointIpConfig.json"
+        },
+        "clientIpRuleName": {
+            "value": "ClientIp-2023-3-22_23-7-47"
+        },
+        "minimalTlsVersion": {
+            "value": "1.2"
+        },
+        "publicNetworkAccess": {
+            "value": "Enabled"
+        },
+        "connectionType": {
+            "value": "Default"
+        },
+        "requestedBackupStorageRedundancy": {
+            "value": "Geo"
+        },
+        "maintenanceConfigurationId": {
+            "value": "/subscriptions/bc058abe-2bd9-4fe6-997e-a7406e675b2f/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default"
+        },
+        "administratorLogin": {
+            "value": "synthese"
+        },
+        "administratorLoginPassword": {
+            "value": null
+        },
+        "identity": {
+            "value": {
+                "type": "None"
+            }
+        },
+        "primaryUserAssignedIdentityId": {
+            "value": ""
+        },
+        "federatedClientId": {
+            "value": ""
+        },
+        "servicePrincipal": {
+            "value": {
+                "type": "None"
+            }
+        }
+    }
+}

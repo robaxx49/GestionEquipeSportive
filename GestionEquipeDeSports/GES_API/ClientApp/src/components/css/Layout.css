@@ -1,0 +1,11 @@
+.container-three-quarters-width {
+    width: calc(100vw * 11/16);
+    /* Set the width to three-quarters of the viewport width */
+    max-width: 100%;
+    /* Ensure the width does not exceed the container's width */
+}
+
+.nav-menu-full-width {
+    width: 100%;
+    /* Set the width to 100% of the container's width */
+}

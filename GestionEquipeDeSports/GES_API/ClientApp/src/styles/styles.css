@@ -1,0 +1,74 @@
+@import "page-layout.css";
+@import "page-loader.css";
+@import "profile-grid.css";
+
+:root {
+    --fontPrincipal: Arial, Helvetica, sans-serif;
+}
+
+div {
+    font-family: var(--fontPrincipal);
+}
+
+h1,
+h2,
+h5 {
+    font-family: var(--fontPrincipal);
+}
+
+input,
+select {
+    font-family: var(--fontPrincipal);
+}
+
+button:not(.btn-etat-utilisateur) {
+    font-family: var(--fontPrincipal);
+    font-size: 19px;
+}
+
+.row {
+    align-items: center;
+}
+
+.row h2,
+.Titre h2,
+.row h5 {
+    margin-bottom: 0;
+}
+
+.instruction {
+    text-align: left;
+
+    & span {
+        font-weight: bold;
+    }
+}
+
+label,
+option {
+    font-family: var(--fontPrincipal);
+    font-size: 18px;
+    color: #666;
+}
+
+th,
+td {
+    vertical-align: middle;
+    text-align: center;
+    font-family: var(--fontPrincipal);
+}
+
+th {
+    background-color: #007BFF !important;
+    color: #FFF !important;
+    font-size: 1.1em;
+}
+
+td > svg {
+    vertical-align: text-top;
+}
+
+td a.bouton-facebook svg {
+    height: 42px !important;
+    width: 42px !important;
+}

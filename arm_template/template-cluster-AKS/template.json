@@ -1,0 +1,333 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "type": "string",
+            "metadata": {
+                "description": "Nom de la ressource Cluster managé."
+            }
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Emplacement de la ressource AKS."
+            }
+        },
+        "dnsPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "Préfixe DNS facultatif à utiliser avec le FQDN du serveur d'API Kubernetes hébergé."
+            }
+        },
+        "osDiskSizeGB": {
+            "type": "int",
+            "defaultValue": 0,
+            "metadata": {
+                "description": "Taille de disque (en Gio) à provisionner pour chacun des nœuds du pool d'agents. Cette valeur est comprise entre 0 et 1 023. La valeur 0 applique la taille de disque par défaut pour cet agentVMSize."
+            },
+            "minValue": 0,
+            "maxValue": 1023
+        },
+        "kubernetesVersion": {
+            "type": "string",
+            "defaultValue": "1.7.7",
+            "metadata": {
+                "description": "Version de Kubernetes."
+            }
+        },
+        "networkPlugin": {
+            "type": "string",
+            "allowedValues": [
+                "azure",
+                "kubenet"
+            ],
+            "metadata": {
+                "description": "Plug-in réseau utilisé pour la création du réseau Kubernetes."
+            }
+        },
+        "enableRBAC": {
+            "type": "bool",
+            "defaultValue": true,
+            "metadata": {
+                "description": "Indicateur booléen à activer/désactiver pour RBAC."
+            }
+        },
+        "vmssNodePool": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Indicateur booléen à activer/désactiver pour les groupes de machines virtuelles identiques"
+            }
+        },
+        "windowsProfile": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Indicateur booléen à activer/désactiver pour les groupes de machines virtuelles identiques"
+            }
+        },
+        "nodeResourceGroup": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the resource group containing agent pool nodes."
+            }
+        },
+        "upgradeChannel": {
+            "metadata": {
+                "description": "Auto upgrade channel for a managed cluster."
+            },
+            "type": "string",
+            "allowedValues": [
+                "none",
+                "patch",
+                "rapid",
+                "stable",
+                "node-image"
+            ]
+        },
+        "adminGroupObjectIDs": {
+            "type": "array",
+            "defaultValue": [],
+            "metadata": {
+                "description": "Tableau d'ID des objets de groupe AAD auxquels accorder un accès administratif."
+            }
+        },
+        "azureRbac": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Enable or disable Azure RBAC."
+            }
+        },
+        "disableLocalAccounts": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Enable or disable local accounts."
+            }
+        },
+        "enablePrivateCluster": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Activez l'accès réseau privé au cluster Kubernetes."
+            }
+        },
+        "enableHttpApplicationRouting": {
+            "type": "bool",
+            "defaultValue": true,
+            "metadata": {
+                "description": "Indicateur booléen à activer/désactiver pour le routage des applications HTTP."
+            }
+        },
+        "enableAzurePolicy": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Indicateur booléen à activer/désactiver pour le composant additionnel Azure Policy."
+            }
+        },
+        "enableSecretStoreCSIDriver": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Indicateur booléen permettant d’activer et de désactiver le pilote CSI du magasin des secrets."
+            }
+        }
+    },
+    "resources": [
+        {
+            "name": "InsightsActionGroupDepl-6954744a-9322-4f85-9da9-c783c18cd060",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2017-05-10",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": [
+                        {
+                            "type": "microsoft.insights/actionGroups",
+                            "apiVersion": "2022-06-01",
+                            "name": "RecommendedAlertRules-AG-1",
+                            "location": "Global",
+                            "properties": {
+                                "groupShortName": "recalert1",
+                                "enabled": true,
+                                "emailReceivers": [
+                                    {
+                                        "name": "Email_-EmailAction-",
+                                        "emailAddress": "1962910@csfoy.ca",
+                                        "useCommonAlertSchema": true
+                                    }
+                                ],
+                                "emailSMSAppReceivers": []
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "InsightsMetricAlertsDepl-6954744a-9322-4f85-9da9-c783c18cd061",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2017-05-10",
+            "dependsOn": [
+                "/subscriptions/bc058abe-2bd9-4fe6-997e-a7406e675b2f/resourcegroups/myapp-rg/providers/Microsoft.ContainerService/managedClusters/cluster-k8s",
+                "[concat('Microsoft.Resources/deployments/', 'InsightsActionGroupDepl-6954744a-9322-4f85-9da9-c783c18cd060')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": [
+                        {
+                            "type": "microsoft.insights/metricAlerts",
+                            "apiVersion": "2018-03-01",
+                            "name": "CPU Usage Percentage - cluster-k8s",
+                            "location": "Global",
+                            "properties": {
+                                "severity": 3,
+                                "enabled": true,
+                                "scopes": [
+                                    "/subscriptions/bc058abe-2bd9-4fe6-997e-a7406e675b2f/resourcegroups/myapp-rg/providers/Microsoft.ContainerService/managedClusters/cluster-k8s"
+                                ],
+                                "evaluationFrequency": "PT5M",
+                                "windowSize": "PT5M",
+                                "criteria": {
+                                    "allOf": [
+                                        {
+                                            "name": "Metric1",
+                                            "metricName": "node_cpu_usage_percentage",
+                                            "metricNamespace": "Microsoft.ContainerService/managedClusters",
+                                            "operator": "GreaterThan",
+                                            "timeAggregation": "Average",
+                                            "criterionType": "StaticThresholdCriterion",
+                                            "threshold": 80
+                                        }
+                                    ],
+                                    "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+                                },
+                                "targetResourceType": "Microsoft.ContainerService/managedClusters",
+                                "actions": [
+                                    {
+                                        "actionGroupId": "[resourceId('Microsoft.Insights/ActionGroups', 'RecommendedAlertRules-AG-1')]",
+                                        "webhookProperties": {}
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "microsoft.insights/metricAlerts",
+                            "apiVersion": "2018-03-01",
+                            "name": "Memory Working Set Percentage - cluster-k8s",
+                            "location": "Global",
+                            "properties": {
+                                "severity": 3,
+                                "enabled": true,
+                                "scopes": [
+                                    "/subscriptions/bc058abe-2bd9-4fe6-997e-a7406e675b2f/resourcegroups/myapp-rg/providers/Microsoft.ContainerService/managedClusters/cluster-k8s"
+                                ],
+                                "evaluationFrequency": "PT5M",
+                                "windowSize": "PT5M",
+                                "criteria": {
+                                    "allOf": [
+                                        {
+                                            "name": "Metric1",
+                                            "metricName": "node_memory_working_set_percentage",
+                                            "metricNamespace": "Microsoft.ContainerService/managedClusters",
+                                            "operator": "GreaterThan",
+                                            "timeAggregation": "Average",
+                                            "criterionType": "StaticThresholdCriterion",
+                                            "threshold": 80
+                                        }
+                                    ],
+                                    "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+                                },
+                                "targetResourceType": "Microsoft.ContainerService/managedClusters",
+                                "actions": [
+                                    {
+                                        "actionGroupId": "[resourceId('Microsoft.Insights/ActionGroups', 'RecommendedAlertRules-AG-1')]",
+                                        "webhookProperties": {}
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "2022-06-01",
+            "dependsOn": [],
+            "type": "Microsoft.ContainerService/managedClusters",
+            "location": "[parameters('location')]",
+            "name": "[parameters('resourceName')]",
+            "properties": {
+                "kubernetesVersion": "[parameters('kubernetesVersion')]",
+                "enableRBAC": "[parameters('enableRBAC')]",
+                "dnsPrefix": "[parameters('dnsPrefix')]",
+                "nodeResourceGroup": "[parameters('nodeResourceGroup')]",
+                "agentPoolProfiles": [
+                    {
+                        "name": "agentpool",
+                        "osDiskSizeGB": "[parameters('osDiskSizeGB')]",
+                        "count": 3,
+                        "enableAutoScaling": true,
+                        "minCount": 1,
+                        "maxCount": 1,
+                        "vmSize": "Standard_B2s",
+                        "osType": "Linux",
+                        "storageProfile": "ManagedDisks",
+                        "type": "VirtualMachineScaleSets",
+                        "mode": "System",
+                        "maxPods": 110,
+                        "availabilityZones": [],
+                        "nodeTaints": [],
+                        "enableNodePublicIP": false,
+                        "tags": {}
+                    }
+                ],
+                "networkProfile": {
+                    "loadBalancerSku": "standard",
+                    "networkPlugin": "[parameters('networkPlugin')]"
+                },
+                "autoUpgradeProfile": {
+                    "upgradeChannel": "[parameters('upgradeChannel')]"
+                },
+                "disableLocalAccounts": "[parameters('disableLocalAccounts')]",
+                "apiServerAccessProfile": {
+                    "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
+                },
+                "addonProfiles": {
+                    "httpApplicationRouting": {
+                        "enabled": "[parameters('enableHttpApplicationRouting')]"
+                    },
+                    "azurepolicy": {
+                        "enabled": "[parameters('enableAzurePolicy')]"
+                    },
+                    "azureKeyvaultSecretsProvider": {
+                        "enabled": "[parameters('enableSecretStoreCSIDriver')]",
+                        "config": null
+                    }
+                }
+            },
+            "tags": {},
+            "sku": {
+                "name": "Basic",
+                "tier": "Free"
+            },
+            "identity": {
+                "type": "SystemAssigned"
+            }
+        }
+    ],
+    "outputs": {
+        "controlPlaneFQDN": {
+            "type": "string",
+            "value": "[reference(concat('Microsoft.ContainerService/managedClusters/', parameters('resourceName'))).fqdn]"
+        }
+    }
+}
